@@ -26,7 +26,14 @@ public class AuthenticationService {
 
     public AuthResponseDTO produceAuthentication(AuthenticationDTO data){
         var userNamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
+        System.out.println("userNamePassword :::: " + userNamePassword);
+
+
+        var teste = clientRepository.findByEmail(data.email()).getId();
+        System.out.println("teste :::: " + teste);
+
         var auth = authenticationManager.authenticate(userNamePassword);
+        System.out.println("auth :::: " + auth);
         return new AuthResponseDTO(tokenService.generateToken((ClientModel)auth.getPrincipal()),clientRepository.findByEmail(data.email()).getId());
     }
 

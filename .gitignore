@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+### ALX ###
+postgresDB/data/
+postgresDB/init.sql/

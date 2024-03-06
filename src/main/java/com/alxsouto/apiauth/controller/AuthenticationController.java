@@ -27,7 +27,6 @@ public class AuthenticationController {
     }
     @PostMapping("/register")
     public ResponseEntity<ClientModelDTO> register(@RequestBody RegisterDTO data) {
-
         return ResponseEntity.ok().body(authenticationService.registerClient(data));
     }
     @GetMapping("/validar")

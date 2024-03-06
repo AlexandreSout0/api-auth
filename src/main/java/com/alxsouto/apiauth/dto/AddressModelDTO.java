@@ -5,7 +5,7 @@ import jakarta.persistence.GenerationType;
 
 public record AddressModelDTO(
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        Long id_address,
+        Long id,
         String address_line1,
         String address_line2,
         String cep,

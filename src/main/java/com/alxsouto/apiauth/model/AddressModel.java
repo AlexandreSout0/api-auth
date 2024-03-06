@@ -1,42 +1,46 @@
 package com.alxsouto.apiauth.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 
-@Data
+
 @Getter
 @Setter
-@EqualsAndHashCode
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity
 @Table(name = "address")
 public class AddressModel {
 
-    @Id
+    @jakarta.persistence.Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
+    @Column(name = "cep")
     private String cep;
 
+    @Column(name = "address_line1")
     private String address_line1;
 
+    @Column(name = "address_line2")
     private String address_line2;
 
+    @Column(name = "number")
     private int number;
 
+    @Column(name = "city")
     private String city;
 
+    @Column(name = "country")
     private String country;
 
+    @Column(name = "state")
     private String state;
+
 
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -48,7 +52,6 @@ public class AddressModel {
     public void setCep(String cep) {
         this.cep = cep;
     }
-
     public String getAddress_line1() {
         return address_line1;
     }
@@ -72,7 +75,6 @@ public class AddressModel {
     public void setNumber(int number) {
         this.number = number;
     }
-
     public String getCity() {
         return city;
     }
@@ -96,7 +98,5 @@ public class AddressModel {
     public void setState(String state) {
         this.state = state;
     }
-
-
 
 }

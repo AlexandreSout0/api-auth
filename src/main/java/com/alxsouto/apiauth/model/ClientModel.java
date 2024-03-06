@@ -7,29 +7,38 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.util.Collection;
-
-@Data
 @Getter
 @Setter
-@EqualsAndHashCode
+@Entity
+@Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "client")
 public class ClientModel implements UserDetails {
 
-    @Id
+    @jakarta.persistence.Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
+    @Column(name = "id_address")
+    private String idAddress;
+
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "phone")
     private String phone;
 
+    @Column(name = "email")
     private String email;
 
+    @Column(name = "password")
     private String password;
 
+    @Column(name = "cpf")
     private String cpf;
 
+    @Column(name = "birthday")
     private LocalDate birthday;
 
     public Long getId() {
