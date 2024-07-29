@@ -6,7 +6,9 @@ import com.alxsouto.apiauth.dto.AuthenticationDTO;
 import com.alxsouto.apiauth.dto.ClientModelDTO;
 import com.alxsouto.apiauth.dto.RegisterDTO;
 import com.alxsouto.apiauth.exception.ApiRequestException;
+import com.alxsouto.apiauth.model.AddressModel;
 import com.alxsouto.apiauth.model.ClientModel;
+import com.alxsouto.apiauth.repository.AddressRepository;
 import com.alxsouto.apiauth.repository.ClientRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,6 +25,8 @@ public class AuthenticationService {
     private final TokenService tokenService;
     private final AuthenticationManager authenticationManager;
     private final ClientRepository clientRepository;
+    private final AddressRepository addressRepository;
+
 
     public AuthResponseDTO produceAuthentication(AuthenticationDTO data){
         var userNamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
@@ -51,15 +55,29 @@ public class AuthenticationService {
 
         String encryptPassword = new BCryptPasswordEncoder().encode(client.password());
 
+        AddressModel newAddressModel = new AddressModel(
+                client.cep(),
+                client.address_line1(),
+                client.address_line2(),
+                client.number(),
+                client.city(),
+                client.country(),
+                client.state()
+                );
+        newAddressModel = this.addressRepository.save(newAddressModel);
+        System.out.println(newAddressModel);
+
+
         ClientModel newClientModel = new ClientModel(
                 client.email(),
                 encryptPassword,
+                Math.toIntExact(newAddressModel.getId()),
                 client.name(),
-                client.cpf(),
                 client.phone(),
+                client.cpf(),
                 client.birthday());
         newClientModel = this.clientRepository.save(newClientModel);
-
+        System.out.println(newClientModel);
 
         return new ClientModelDTO(
                 newClientModel.getId(),

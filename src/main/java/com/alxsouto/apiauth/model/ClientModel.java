@@ -21,7 +21,7 @@ public class ClientModel implements UserDetails {
     private Long id;
 
     @Column(name = "id_address")
-    private String idAddress;
+    private int idAddress;
 
     @Column(name = "name")
     private String name;
@@ -100,9 +100,10 @@ public class ClientModel implements UserDetails {
 
 
 
-    public ClientModel(String email, String password, String name, String phone, String cpf, LocalDate birthday){
+    public ClientModel(String email, String password, int idAddress,String name, String phone, String cpf, LocalDate birthday){
         this.email = email;
         this.password = password;
+        this.idAddress = idAddress;
         this.name = name;
         this.phone = phone;
         this.cpf = cpf;

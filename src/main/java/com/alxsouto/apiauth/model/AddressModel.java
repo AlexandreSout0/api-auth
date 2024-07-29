@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 
+import java.time.LocalDate;
+
 
 @Getter
 @Setter
@@ -37,6 +39,16 @@ public class AddressModel {
     @Column(name = "state")
     private String state;
 
+
+    public AddressModel(String cep, String address_line1, String address_line2, int number, String city, String country, String state){
+        this.cep = cep;
+        this.address_line1 = address_line1;
+        this.address_line2 = address_line2;
+        this.number = number;
+        this.city = city;
+        this.country = country;
+        this.state = state;
+    }
 
     public Long getId() {
         return id;
